@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clima-API | Profe Juan de la Torre</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link rel="stylesheet" href="CSS/estilos.css">
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-text-light dark:text-text-dark">
+    <div class="relative flex min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+        <div class="layout-container flex h-full grow flex-col">
+            <div class="px-4 sm:px-10 md:px-20 lg:px-40 flex flex-1 justify-center py-5 sm:py-10">
+                <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+                    <div class="flex flex-wrap justify-between gap-3 p-4">
+                        <div class="flex min-w-72 flex-col gap-3">
+                            <h1
+                                class="text-text-light dark:text-text-dark text-4xl font-black leading-tight tracking-[-0.033em]">
+                                Entrada de datos Meteorológicos</h1>
+                            <p class="text-gray-500 dark:text-gray-400 text-base font-normal leading-normal">Introduce
+                                una ubicación para obtener la información meteorológica más reciente.</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-5 mt-8">
+                        <!-- Sección Input y Select -->
+                        <div class="flex flex-col gap-4 contenido">
+                            <h2
+                                class="text-text-light dark:text-text-dark text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">
+                                Introducir Ubicación</h2>
+                            <form id="formulario" class="w-full" action="#" method="POST">
+                                <div class="flex flex-col sm:flex-row max-w-full flex-wrap items-end gap-4 px-4 py-3">
+
+                                    <label class="flex flex-col min-w-40 flex-1">
+                                        <p
+                                            class="text-text-light dark:text-text-dark text-base font-medium leading-normal pb-2">
+                                            Ciudad</p>
+                                        <input
+                                            class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-text-light dark:text-text-dark focus:outline-0 focus:ring-0 border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark focus:border-primary h-14 placeholder:text-gray-500 dark:placeholder:text-gray-400 p-[15px] text-base font-normal leading-normal"
+                                            type="text" name="ciudad" id="ciudad" placeholder="Ej. Seul, London" />
+                                    </label>
+                                    <label class="flex flex-col min-w-40 flex-1">
+                                        <p
+                                            class="text-text-light dark:text-text-dark text-base font-medium leading-normal pb-2">
+                                            País</p>
+                                        <select
+                                            class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-text-light dark:text-text-dark focus:outline-0 focus:ring-0 border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark focus:border-primary h-14 placeholder:text-gray-500 dark:placeholder:text-gray-400 p-[15px] text-base font-normal leading-normal"
+                                            id="pais">
+                                            <option disabled selected value="">-- Seleccione País --</option>
+                                            <option value="AR">Argentina</option>
+                                            <option value="CO">Colombia</option>
+                                            <option value="CR">Costa Rica</option>
+                                            <option value="ES">España</option>
+                                            <option value="US">Estados Unidos</option>
+                                            <option value="MX">México</option>
+                                            <option value="PE">Perú</option>
+                                        </select>
+                                    </label>
+                                </div>
+                                <div class="flex justify-center items-center">
+                                    <input type="submit"
+                                        class="w-64 bg-blue-500 p-3  uppercase font-bold cursor-pointer rounded text-white"
+                                        value="Consultar Clima" />
+                                </div>
+                            </form>
+                        </div>
+                        <!-- separados linea -->
+                        <div class="px-4">
+                            <hr class="border-border-light dark:border-border-dark" />
+                        </div>
+                        <!-- Sección de Resultados -->
+                        <div class="flex flex-col gap-4">
+                            <h2
+                                class="text-text-light dark:text-text-dark text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">
+                                Resultados Meteorológicos</h2>
+                            <div class="text-center nombre-ciudad"></div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4">
+                                <div
+                                    class="flex flex-col items-center gap-4 p-6 bg-card-light dark:bg-card-dark rounded-xl border border-border-light dark:border-border-dark">
+                                    <div class="flex items-center gap-3">
+                                        <span class="material-symbols-outlined text-red-500 text-3xl"><svg
+                                                xmlns="http://www.w3.org/2000/svg" width="50" height="50"
+                                                viewBox="0 0 24 24">
+                                                <path fill="none" stroke="#f03d63" stroke-linecap="round"
+                                                    stroke-linejoin="round" stroke-width="1.5"
+                                                    d="m12 4l-6 6m6-6l6 6m-6-6v10.5m0 5.5v-2.5" />
+                                            </svg></span>
+                                        <h3 class="text-base font-semibold text-gray-600 dark:text-gray-400">Maxima
+                                            Temperatura</h3>
+                                    </div>
+                                    <div class="tem-max"></div>
+                                    <!-- <p class="text-4xl font-bold text-text-light dark:text-text-dark">--°C</p> -->
+                                </div> <!-- Temperatura Maxima -->
+                                <div
+                                    class="flex flex-col items-center gap-4 p-6 bg-card-light dark:bg-card-dark rounded-xl border border-border-light dark:border-border-dark">
+                                    <div class="flex items-center gap-3">
+                                        <span class="material-symbols-outlined text-primary text-3xl"><svg
+                                                xmlns="http://www.w3.org/2000/svg" width="50" height="50"
+                                                viewBox="0 0 24 24">
+                                                <path fill="#006cfa"
+                                                    d="M13 11V9h5v2zm0-4V5h8v2zM8 21q-2.075 0-3.537-1.463T3 16q0-1.2.525-2.238T5 12V6q0-1.25.875-2.125T8 3t2.125.875T11 6v6q.95.725 1.475 1.763T13 16q0 2.075-1.463 3.538T8 21m-3-5h6q0-.725-.312-1.35T9.8 13.6L9 13V6q0-.425-.288-.712T8 5t-.712.288T7 6v7l-.8.6q-.575.425-.888 1.05T5 16" />
+                                            </svg></span>
+                                        <h3 class="text-base font-semibold text-gray-600 dark:text-gray-400">Temperatura
+                                            actual</h3>
+                                    </div>
+                                    <div class="tem-actual"></div>
+                                    <!-- <p class="text-4xl font-bold text-text-light dark:text-text-dark">--°C</p> -->
+                                </div> <!-- temperatura actual -->
+                                <div
+                                    class="flex flex-col items-center gap-4 p-6 bg-card-light dark:bg-card-dark rounded-xl border border-border-light dark:border-border-dark">
+                                    <div class="flex items-center gap-3">
+                                        <span class="material-symbols-outlined text-blue-500 text-3xl"><svg
+                                                xmlns="http://www.w3.org/2000/svg" width="50" height="50"
+                                                viewBox="0 0 24 24">
+                                                <path fill="#4f46e5"
+                                                    d="M12 21.9q-.2 0-.375-.075T11.3 21.6l-5.6-5.575q-.275-.275-.275-.7T5.7 14.6q.3-.3.713-.3t.712.3L11 18.5v-6.175q0-.425.288-.712t.712-.288t.713.288t.287.712V18.5l3.9-3.9q.275-.275.688-.275t.712.3q.275.275.275.7t-.275.7L12.7 21.6q-.15.15-.325.225T12 21.9m0-12.575q-.425 0-.712-.287T11 8.325v-1q0-.425.288-.712T12 6.325t.713.288t.287.712v1q0 .425-.288.713T12 9.325m0-5q-.425 0-.712-.287T11 3.325t.288-.712t.712-.288t.713.288t.287.712t-.288.713t-.712.287" />
+                                            </svg></span>
+                                        <h3 class="text-base font-semibold text-gray-600 dark:text-gray-400">Minima
+                                            Temperatura</h3>
+                                    </div>
+                                    <div class="tem-min"></div>
+                                    <!-- <p class="text-4xl font-bold text-text-light dark:text-text-dark">--°C</p> -->
+                                </div><!-- Temperatura Minima -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="js/app.js"></script>
+
+</html>
